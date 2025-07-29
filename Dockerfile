@@ -40,5 +40,6 @@ COPY ./static ./static
 ENV GOTRACEBACK=single
 
 EXPOSE 8080
-ENTRYPOINT ["/bin/sh", "-c", "sleep 3600"]
+CMD sh -c "until nslookup backend-svc; do echo waiting for backend-svc; sleep 2; done && nginx -g 'daemon off;'"
+
 
